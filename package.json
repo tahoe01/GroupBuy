@@ -1,0 +1,20 @@
+{
+  "name": "groupbuy",
+  "version": "0.0.0",
+  "private": true,
+  "description": "GroupBuy prototype",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dayuebai/GroupBuy.git"
+  },
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
