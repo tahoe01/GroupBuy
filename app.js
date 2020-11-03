@@ -27,7 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // API path registration
 app.use('/', indexRouter);
-app.use('/register', registerRouter);
 
 // Connect to MySQL
 mysqlConnection.connection.connect();
