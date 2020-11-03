@@ -7,8 +7,15 @@ const port = 8080;
 // Global variables
 var express = require('express');
 var path = require('path');
+var http = require('http');
 
+// Router
 var indexRouter = require('./routes/index');
+var createteamRouter = require('./routes/createteam');
+
+// MySQL Connection
+var mysqlConnection = require('./common/mysql-connection');
+
 var app = express();
 
 // view engine setup
@@ -19,10 +26,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// API path registration
 app.use('/', indexRouter);
+app.use('/createteam', createteamRouter);
+
+mysqlConnection.connection.connect();
 
 module.exports = app;
 
-app.listen(port, () => {
-  console.log(`GroupBuy listening at http://localhost:${port}`);
-})
+var server = http.createServer(app);
+server.listen(8080, function() {
+  console.log('Gryffindor is listening on port 8080');
+});
+
+// TODO: close MySQL connection
