@@ -8,9 +8,11 @@ const port = 8080;
 var express = require('express');
 var path = require('path');
 var http = require('http');
+var bodyParser = require('body-parser');
 
 // Router
 var indexRouter = require('./routes/index');
+var createTeamRouter = require('./routes/createteam');
 
 // MySQL Connection
 var mysqlConnection = require('./common/mysql-connection');
@@ -24,9 +26,12 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // API path registration
 app.use('/', indexRouter);
+app.use('/createteam', createTeamRouter);
 
 // Connect to MySQL
 mysqlConnection.connection.connect();

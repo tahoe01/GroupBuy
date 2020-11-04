@@ -15,7 +15,7 @@ CREATE TABLE Users (
 CREATE TABLE Teams (
     `teamId`        INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `status`        VARCHAR (20) NOT NULL,
-    `maxGoupSize`   INT UNSIGNED NOT NULL,
+    `maxGroupSize`   INT UNSIGNED NOT NULL,
     `initiatorId`   INT UNSIGNED NOT NULL, 
     PRIMARY KEY     (`teamId`),
     FOREIGN KEY     (`initiatorId`) REFERENCES Users(`userId`)

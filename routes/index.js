@@ -26,7 +26,7 @@ var getHandler = function(req, res) {
 
   console.log('query:' + query);
   if (query != '') {
-    queryResult = sendQuery(query, res);
+    sendQuery(query, res);
   } else {
     res.render('index');
   }
