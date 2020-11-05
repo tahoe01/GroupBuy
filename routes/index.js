@@ -24,9 +24,10 @@ var getHandler = function(req, res) {
     query = `select * from Products where ${searchKey}="${searchValue}" limit ${offset}, ${limit}`;
   }
 
-  console.log('query:' + query);
+  // console.log('query:' + query);
   if (query != '') {
-    sendQuery(query, res);
+    // sendQuery(query, res);
+    res.render('index');
   } else {
     res.render('index');
   }
