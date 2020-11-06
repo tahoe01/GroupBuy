@@ -29,6 +29,7 @@ var getHandler = function(req, res) {
       // res.status(200).json({data: teamData});
       res.render('modifyteam', {teamData: teamData, userId: userId, teamId: teamId});
     });
+    return;
   }
 
   if (queryObj['action'] === 'submitTeamModification') {

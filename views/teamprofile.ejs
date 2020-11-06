@@ -49,8 +49,8 @@
         <%
         if(teamData && teamData.length != 0){
         teamData.forEach(function(data){
-          var arr = (data.purchaseDate.toString().split(" "))
-          var date = arr.slice(0, 4).join(' ')
+          <!-- var arr = (data.purchaseDate.toString().split(" ")) -->
+          <!-- var date = arr.slice(0, 4).join(' ') -->
         %>
         <tr>
             <td><%=data.teamId %></td>
@@ -59,7 +59,6 @@
             <td><%=data.maxGroupSize %></td>
             <td><%=data.productName %></td>
             <td><%=data.company %></td>
-            <td><%=date %></td>
             <td><%=data.price %></td>
             <td><a href='/teamprofile?action=modifyTeam&teamId=<%=data.teamId%>&userId=<%=currentUserId%>'>Modify Team</a></td>
             <!-- <td><a href='/teamprofile?action=activate&teamId=<%=data.teamId%>&userId=<%=currentUserId%>&productId=<%=data.productId%>'>Activate</a></td>
