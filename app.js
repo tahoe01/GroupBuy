@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 
 // Router
 var indexRouter = require('./routes/index');
-var createTeamRouter = require('./routes/createteam');
+var teamProfileRouter = require('./routes/teamprofile');
 
 // MySQL Connection
 var mysqlConnection = require('./common/mysql-connection');
@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 
 // API path registration
 app.use('/', indexRouter);
-app.use('/createteam', createTeamRouter);
+app.use('/teamprofile', teamProfileRouter);
 
 // Connect to MySQL
 mysqlConnection.connection.connect();
