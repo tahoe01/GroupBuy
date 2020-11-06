@@ -70,8 +70,8 @@ function executeTransaction(reqBody, res) {
                   throw err;
                 });
               }
-              res.render('index');
-              // res.status(200).json({ message : "success"});
+              // res.render('index');
+              res.status(200).json({ message : "success"});
               console.log('success!');
             });
 
