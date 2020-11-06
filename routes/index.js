@@ -29,7 +29,7 @@ var getHandler = function(req, res) {
     }
   }
 
-  console.log('query:' + query);
+  // console.log('query:' + query);
   if (query != '') {
     sendQuery(query, res);
   } else {
@@ -44,7 +44,7 @@ function sendQuery(query, res) {
     if (error) 
       throw error;
 
-    console.log(results);
+    // console.log(results);
     res.render('index', {retrieveResult: results});
     // console.log(results);
     // if (query.endsWith("from Products;")) {

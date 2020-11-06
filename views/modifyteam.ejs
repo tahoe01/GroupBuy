@@ -9,24 +9,33 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand text-white" href="/">GroupBuy</a>
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #563D7C">
+        <a class="navbar-brand text-light" style="font-family: Courgette; font-style: italic; font-weight: bolder;" href="#">GroupBuy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+            <li class="nav-item active">
+              <a class="nav-link text-light" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/teamprofile">Team Profile<span class="sr-only">(current)</span></a>
-              </li>
+              <a class="nav-link text-light" href="/teamprofile">Team Profile<span class="sr-only">(current)</span></a>
+            </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2 text-white" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0 text-white" type="submit">Search</button>
+          <div class="dropdown show">
+            <a class="btn btn-light dropdown-toggle" style="margin-right: 10px;" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</a>     
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <p class="dropdown-item">All</p>
+              <p class="dropdown-item">Product Name</a>
+              <p class="dropdown-item">Company</a>
+              <p class="dropdown-item">Tag</a>
+            </div>
+          </div>
+          <form id="search_form" class="form-inline my-2 my-lg-0" method="get" action="#">
+            <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">search</button>
           </form>
         </div>
       </nav>
