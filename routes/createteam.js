@@ -19,6 +19,10 @@ function executeTransaction(reqBody, res) {
     if (err) { 
       throw err; 
     }
+    console.log("INFO I GET");
+    reqBody.userId=1; //hard code user id for now
+    console.log(reqBody.productId);
+    console.log(reqBody.maxGroupSize);
     const insertTeamQuery = `insert into Teams(status, maxGroupSize, initiatorId) values("incomplete", ${reqBody.maxGroupSize}, ${reqBody.userId})`;
     const findTeamIdQuery = 'select max(teamId) as maxTeamId from Teams';
     
@@ -66,8 +70,8 @@ function executeTransaction(reqBody, res) {
                   throw err;
                 });
               }
-
-              res.status(200).json({ message : "success"});
+              res.render('index');
+              // res.status(200).json({ message : "success"});
               console.log('success!');
             });
 
