@@ -11,6 +11,7 @@ var queryResult;
 
 var getHandler = function(req, res) {
   const queryObj = url.parse(req.url, true).query;
+  const validKeyArr = ["company", "tag", "productName"];
   var query = '';
   
   if (Object.keys(queryObj).length === 0) {
@@ -21,16 +22,20 @@ var getHandler = function(req, res) {
     const limit = 'limit' in queryObj ? queryObj['limit'] : 30;
     const offset = 'offset' in queryObj ? queryObj['offset'] : 0;
     
-    query = `select * from Products where ${searchKey}="${searchValue}" limit ${offset}, ${limit}`;
+    if (searchKey == "all") {
+      query = `select * from Products where productName="${searchValue}" or tag="${searchValue}" or company="${searchValue}";`
+    } else if (validKeyArr.includes(searchKey)){
+      query = `select * from Products where ${searchKey}="${searchValue}" limit ${offset}, ${limit}`;
+    }
   }
 
   // console.log('query:' + query);
   if (query != '') {
-    // sendQuery(query, res);
-    res.render('index');
+    sendQuery(query, res);
   } else {
-    res.render('index');
+    res.render('404');
   }
+  
 }
 
 function sendQuery(query, res) {
@@ -40,7 +45,7 @@ function sendQuery(query, res) {
       throw error;
 
     console.log(results);
-    res.status(200).json({data: results});
+    res.render('index', {retrieveResult: results});
   });
 }
 
