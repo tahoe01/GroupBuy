@@ -44,8 +44,14 @@ function sendQuery(query, res) {
     if (error) 
       throw error;
 
-    console.log(results);
     res.render('index', {retrieveResult: results});
+    // console.log(results);
+    // if (query.endsWith("from Products;")) {
+    //   res.render('index', {retrieveResult: results});
+    // } else {
+    //   console.log("send data");
+    //   res.send({retrieveResult: results});
+    // }
   });
 }
 

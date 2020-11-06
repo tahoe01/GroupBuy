@@ -37,7 +37,7 @@ function submitForm(event) {
     jQuery.get(
         url, 
         function(data) {
-            console.log(data);
+            console.log("get back data");
         },
     )
 }

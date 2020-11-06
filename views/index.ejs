@@ -6,13 +6,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="/javascripts/index.js"></script>
+    <script src="/javascripts/home.js"></script>
     <title>GroupBuy</title>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #563D7C">
-    <a class="navbar-brand text-light" style="font-family: Courgette; font-style: italic; font-weight: bolder;" href="#">Navbar</a>
+    <a class="navbar-brand text-light" style="font-family: Courgette; font-style: italic; font-weight: bolder;" href="#">GroupBuy</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,5 +38,25 @@
       </form>
     </div>
   </nav>
+  
+  <% console.log('-------------------------------------------------------------'); %>
+  <% console.log(locals.retrieveResult.length); %>
+  <% console.log(locals.retrieveResult); %>
+
+  <div id="content" class="container">
+    <% for ( x in locals.retrieveResult) { %>
+      <div class="jumbotron" style="margin: 20px; padding: 20px;">
+        <a class="display-4" style="text-decoration: none; color:#563D7C" href="<%= locals.retrieveResult[x].link%>" > <%= locals.retrieveResult[x].productName  %> </a>
+        <p class="lead">Company: <%= locals.retrieveResult[x].company  %> </p>
+        <p class="lead">Tag: <%= locals.retrieveResult[x].tag  %> </p>
+        <p class="lead">Price: <%= locals.retrieveResult[x].price  %> </p>
+        <hr class="my-4">
+        <p><%= locals.retrieveResult[x].description  %></p>
+        <a class="btn btn-primary btn-lg" href="#" style="background-color:#563D7C; border-color: #563D7C;" role="button">Create a Team</a>
+      </div>                                
+    <% } %>
+  </div>
+     
+  
 </body>
 </html>
