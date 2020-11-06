@@ -46,25 +46,14 @@
     <% for ( x in locals.retrieveResult) { %>
       <div class="jumbotron" style="margin: 20px; padding: 20px;">
         <a class="display-4" style="text-decoration: none; color:#563D7C" href="<%= locals.retrieveResult[x].link%>" > <%= locals.retrieveResult[x].productName  %> </a>
-        <!-- <p class="lead productId"> Product Id: <%= locals.retrieveResult[x].productId  %></p> -->
         <p class="lead">Company: <%= locals.retrieveResult[x].company  %> </p>
         <p class="lead">Tag: <%= locals.retrieveResult[x].tag  %> </p>
         <p class="lead">Price: <%= locals.retrieveResult[x].price  %> </p>
         <hr class="my-4">
         <p><%= locals.retrieveResult[x].description  %></p>
-        <!-- <div class="row">
-          <div class="col-8">
-            <a class="btn btn-primary btn-lg createteam" href="" style="background-color:#563D7C; border-color: #563D7C;" role="button" data-toggle="modal" data-target="#exampleModal">Create a Team</a>
-          </div>
-          <div class="col-4">
-            <input class="form-control teamSize" type="text" name="maxGroupSize" placeholder="Max Team Size" aria-label="Search">
-          </div>
-        </div> -->
-   
-        <form class="team-form form-inline my-2 my-lg-0" action="http://localhost:8080/createteam" method="POST" action="#">
+        <form class="team-form form-inline my-2 my-lg-0" action="/createteam" method="POST" action="#">
           <input class="lead productId" name="productId" value=<%= locals.retrieveResult[x].productId  %> hidden>
           <input class="form-control mr-sm-2 teamSize" name="maxGroupSize" type="search" placeholder="Enter max group size" aria-label="Search">
-          <!-- <input type="submit" value="Submit">   -->
           <button class="btn my-2 my-sm-0 text-light" style="background-color:#563D7C; border-color: #563D7C;" type="submit">Create Team</button>
         </form>
 
