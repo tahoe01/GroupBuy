@@ -47,16 +47,51 @@
     <% for ( x in locals.retrieveResult) { %>
       <div class="jumbotron" style="margin: 20px; padding: 20px;">
         <a class="display-4" style="text-decoration: none; color:#563D7C" href="<%= locals.retrieveResult[x].link%>" > <%= locals.retrieveResult[x].productName  %> </a>
+        <!-- <p class="lead productId"> Product Id: <%= locals.retrieveResult[x].productId  %></p> -->
         <p class="lead">Company: <%= locals.retrieveResult[x].company  %> </p>
         <p class="lead">Tag: <%= locals.retrieveResult[x].tag  %> </p>
         <p class="lead">Price: <%= locals.retrieveResult[x].price  %> </p>
         <hr class="my-4">
         <p><%= locals.retrieveResult[x].description  %></p>
-        <a class="btn btn-primary btn-lg" href="#" style="background-color:#563D7C; border-color: #563D7C;" role="button">Create a Team</a>
+        <!-- <div class="row">
+          <div class="col-8">
+            <a class="btn btn-primary btn-lg createteam" href="" style="background-color:#563D7C; border-color: #563D7C;" role="button" data-toggle="modal" data-target="#exampleModal">Create a Team</a>
+          </div>
+          <div class="col-4">
+            <input class="form-control teamSize" type="text" name="maxGroupSize" placeholder="Max Team Size" aria-label="Search">
+          </div>
+        </div> -->
+        <form class="form-inline my-2 my-lg-0 team-form" method="get" action="#">
+          <p class="lead productId"> Product Id: <%= locals.retrieveResult[x].productId  %></p>
+          <input class="form-control mr-sm-2 teamSize" type="search" placeholder="Max Group Size" aria-label="Search">
+          <button class="btn my-2 my-sm-0 text-light" style="background-color:#563D7C; border-color: #563D7C;" type="submit">Create Team</button>
+        </form>
+        
+        <!-- popup page -->
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create a Team</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <label> Your Max Team Size: </label>
+                <input id="teamSize" class="form-control mr-sm-2" type="text" name="maxGroupSize" placeholder="Max Team Size" aria-label="Search">
+              </div>
+              <div class="modal-footer">
+                <p id="productId" class="lead"> Product Id: <%= locals.retrieveResult[x].productId  %></p>
+                <button type="button" class="btn btn-secondary" style="background-color:#563D7C; border-color: #563D7C;" data-dismiss="modal">Close</button>
+                <button type="button" id="createteam" class="btn btn-primary" style="background-color:#563D7C; border-color: #563D7C;" data-dismiss="modal">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
       </div>                                
     <% } %>
   </div>
-     
-  
 </body>
 </html>
