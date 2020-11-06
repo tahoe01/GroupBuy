@@ -30,7 +30,7 @@ function submitForm(event) {
 
     console.log("start searching...");
 
-    let url = "?" + keyMap[key] + "=" + value;
+    let url = "http://localhost:8080/" + "?" + keyMap[key] + "=" + value;
     console.log(url);
 
     // Sending request to backend
@@ -38,6 +38,9 @@ function submitForm(event) {
         url, 
         function(data) {
             console.log("get back data");
+            var newDoc = document.open('text/html', 'replace');
+            newDoc.write(data);
+            newDoc.close();
         },
     )
 }

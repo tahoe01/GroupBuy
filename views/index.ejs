@@ -22,6 +22,9 @@
         <li class="nav-item active">
           <a class="nav-link text-light" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link text-light" href="/teamprofile">Team Profile<span class="sr-only">(current)</span></a>
+        </li>
       </ul>
       <div class="dropdown show">
         <a class="btn btn-light dropdown-toggle" style="margin-right: 10px;" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</a>     
@@ -38,10 +41,6 @@
       </form>
     </div>
   </nav>
-  
-  <% console.log('-------------------------------------------------------------'); %>
-  <% console.log(locals.retrieveResult.length); %>
-  <% console.log(locals.retrieveResult); %>
 
   <div id="content" class="container">
     <% for ( x in locals.retrieveResult) { %>
@@ -63,34 +62,11 @@
         </div> -->
    
         <form class="team-form form-inline my-2 my-lg-0" action="http://localhost:8080/createteam" method="POST" action="#">
-          <input class="lead productId" name="productId" value=<%= locals.retrieveResult[x].productId  %>>
-          <input class="form-control mr-sm-2 teamSize" name="maxGroupSize" type="search" placeholder="Max Group Size" aria-label="Search">
-          <input type="submit" value="Submit">  
-          <!-- <button class="btn my-2 my-sm-0 text-light" style="background-color:#563D7C; border-color: #563D7C;" type="submit">Create Team</button> -->
+          <input class="lead productId" name="productId" value=<%= locals.retrieveResult[x].productId  %> hidden>
+          <input class="form-control mr-sm-2 teamSize" name="maxGroupSize" type="search" placeholder="Enter max group size" aria-label="Search">
+          <!-- <input type="submit" value="Submit">   -->
+          <button class="btn my-2 my-sm-0 text-light" style="background-color:#563D7C; border-color: #563D7C;" type="submit">Create Team</button>
         </form>
-        
-        <!-- popup page -->
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create a Team</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <label> Your Max Team Size: </label>
-                <input id="teamSize" class="form-control mr-sm-2" type="text" name="maxGroupSize" placeholder="Max Team Size" aria-label="Search">
-              </div>
-              <div class="modal-footer">
-                <p id="productId" class="lead"> Product Id: <%= locals.retrieveResult[x].productId  %></p>
-                <button type="button" class="btn btn-secondary" style="background-color:#563D7C; border-color: #563D7C;" data-dismiss="modal">Close</button>
-                <button type="button" id="createteam" class="btn btn-primary" style="background-color:#563D7C; border-color: #563D7C;" data-dismiss="modal">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div> -->
 
       </div>                                
     <% } %>

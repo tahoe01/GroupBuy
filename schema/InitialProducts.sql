@@ -18,3 +18,4 @@ VALUES
 
 ('McAfee AntiVirus Unlimited', 'McAfee', 29.99, 'https://www.mcafee.com/en-us/for-home.html',
  'Security,Technology', 'Up to 10 devices. $29.99/year for 2-Year subscription. Protect against viruses, malware and online threats.');
+ INSERT INTO Users VALUES(1, "Dayue", "Bai", "dayueb2@illinois.edu", "gryffindor", 12345678);
