@@ -1,3 +1,4 @@
+
 'use strict';
 
 var express = require('express');
@@ -14,7 +15,7 @@ var getHandler = function(req, res) {
   var query = '';
   
   if (Object.keys(queryObj).length === 0) {
-    query = 'select * from Products;';
+    query = 'SELECT * FROM UserInTeam WHERE userId = 1;';
   } else {
     const searchKey = Object.keys(queryObj)[0];
     const searchValue = queryObj[searchKey];
@@ -24,12 +25,15 @@ var getHandler = function(req, res) {
     query = `select * from Products where ${searchKey}="${searchValue}" limit ${offset}, ${limit}`;
   }
 
-  console.log('query:' + query);
+  console.log('query: ' + query);
   if (query != '') {
-    sendQuery(query, res);
+    // sendQuery(query, res);
+    res.render('index');
   } else {
     res.render('index');
   }
+  // console.log('hit')
+  // res.render('index')
 }
 
 function sendQuery(query, res) {

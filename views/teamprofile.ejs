@@ -17,10 +17,10 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/teamprofile">Team Profile<span class="sr-only">(current)</span></a>
               </li>
           </ul>
@@ -30,5 +30,49 @@
           </form>
         </div>
       </nav>
+      <table border="1">
+        <tr>
+            <th>Team ID</th>
+            <th>Status</th>
+            <th>Team Size</th>
+            <th>Total Capacity</th>
+            <th>Product Name</th>
+            <th>Company</th>
+            <th>Start Date</th>
+            <th>Price</th>
+            <th></th>
+            <!-- <th></th>
+            <th></th> -->
+            <th></th>
+        </tr>
+          
+        <%
+        if(teamData && teamData.length != 0){
+        teamData.forEach(function(data){
+          var arr = (data.purchaseDate.toString().split(" "))
+          var date = arr.slice(0, 4).join(' ')
+        %>
+        <tr>
+            <td><%=data.teamId %></td>
+            <td><%=data.status %></td>
+            <td><%=data.teamSize %></td>
+            <td><%=data.maxGroupSize %></td>
+            <td><%=data.productName %></td>
+            <td><%=data.company %></td>
+            <td><%=date %></td>
+            <td><%=data.price %></td>
+            <td><a href='/teamprofile?action=modifyTeam&teamId=<%=data.teamId%>&userId=<%=currentUserId%>'>Modify Team</a></td>
+            <!-- <td><a href='/teamprofile?action=activate&teamId=<%=data.teamId%>&userId=<%=currentUserId%>&productId=<%=data.productId%>'>Activate</a></td>
+            <td><a href='/teamprofile?action=deactivate&teamId=<%=data.teamId%>&userId=<%=currentUserId%>&productId=<%=data.productId%>>'>Deactivate</a></td> -->
+            <td><a href='/teamprofile?action=leaveTeam&teamId=<%=data.teamId%>&userId=<%=currentUserId%>'>Leave Team</a></td>
+        </tr>
+        <% }) %>
+        <% } else{ %>
+            <tr>
+                <td colspan="2">No Data Found</td>
+            </tr>
+        <% } %>
+      </table>
+      
 </body>
 </html>
