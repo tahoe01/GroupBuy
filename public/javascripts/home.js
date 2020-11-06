@@ -30,7 +30,7 @@ function submitForm(event) {
 
     console.log("start searching...");
 
-    let url = "http://localhost:8080/" + "?" + keyMap[key] + "=" + value;
+    let url = "/?" + keyMap[key] + "=" + value;
     console.log(url);
 
     // Sending request to backend
