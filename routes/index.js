@@ -44,8 +44,8 @@ function sendQuery(query, res) {
     if (error) 
       throw error;
 
-    // console.log(results);
-    res.render('index', {retrieveResult: results});
+    var currentUserId = 1
+    res.render('index', {retrieveResult: results, userId: currentUserId});
     // console.log(results);
     // if (query.endsWith("from Products;")) {
     //   res.render('index', {retrieveResult: results});
