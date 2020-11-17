@@ -15,16 +15,17 @@ var postHandler = function(req, res) {
 }
 
 function executeTransaction(reqBody, res) {
+  console.log(reqBody);
+  console.log(reqBody.firstName);
+  console.log(reqBody.lastName);
+  console.log(reqBody.email);
+  console.log(reqBody.password);
+  console.log(reqBody.phoneNumber);
+
   mysqlConnection.connection.beginTransaction(function(err) {
     if (err) { 
       throw err; 
     }
-    console.log(reqBody);
-    console.log(reqBody.firstName);
-    console.log(reqBody.lastName);
-    console.log(reqBody.email);
-    console.log(reqBody.password);
-    console.log(reqBody.phoneNumber);
     const insertUserQuery = `insert into Users(firstName, lastName, email, password, phoneNumber) values("${reqBody.firstName}", "${reqBody.lastName}", "${reqBody.email}", "${reqBody.password}", "${reqBody.phoneNumber}")`;
     const findUserIdQuery = 'select max(userId) as maxUserId from Users';
     
@@ -53,8 +54,7 @@ function executeTransaction(reqBody, res) {
               throw err;
             });
           }
-          res.render('index',{userId: maxUserId});
-          
+          res.status(200).json({userId: maxUserId})
         });
 
       });
@@ -64,9 +64,11 @@ function executeTransaction(reqBody, res) {
   });
 };
  
-
+const getHandler = function(req, res) {
+  res.render('createaccount');
+}
 
 router.post('/', postHandler);
-
+router.get('/', getHandler);
 
 module.exports = router;

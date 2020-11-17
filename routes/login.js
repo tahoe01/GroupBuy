@@ -54,7 +54,7 @@ function executeTransaction(reqBody, res) {
 };
  
 const getHandler = function(req, res) {
-    res.render("login");
+    res.render('login');
 }
 
 router.post('/', postHandler);
