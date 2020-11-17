@@ -33,10 +33,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // API path registration
-app.use('/', indexRouter);
+app.use('/', loginRouter);
+app.use('/index', indexRouter);
 app.use('/teamprofile', teamProfileRouter);
 app.use('/createteam', createTeamRouter);
-app.use('/login', loginRouter);
 app.use('/createaccount', createAccountRouter);
 
 // Connect to MySQL

@@ -19,7 +19,7 @@ function executeTransaction(reqBody, res) {
     if (err) { 
       throw err; 
     }
-
+    console.log(reqBody);
     console.log(reqBody.email);
     console.log(reqBody.password);
     const checkUserQuery = `select userId from Users where email="${reqBody.email}" and password="${reqBody.password}"`;
@@ -43,28 +43,22 @@ function executeTransaction(reqBody, res) {
         console.log("valid info");
         var loginUserId = results[0]["userId"];
         console.log(loginUserId);
+
+        res.redirect(`/index`);
       }
 
-      
-        mysqlConnection.connection.commit(function(err) {
-          if (err) {
-            res.status(500).json({ message : "failure"});
-            return mysqlConnection.connection.rollback(function() {
-              throw err;
-            });
-          }
-          res.render('index',{userId: loginUserId});
-          
-        });
 
     });
 
   });
 };
  
-
+const getHandler = function(req, res) {
+    res.render("login");
+}
 
 router.post('/', postHandler);
+router.get('/', getHandler);
 
 
 module.exports = router;

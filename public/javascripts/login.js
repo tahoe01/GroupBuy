@@ -10,10 +10,11 @@ function submitLoginForm(formSubmitEvent){
 	formSubmitEvent.preventDefault();
 	
 	jQuery.post(
-			"login",
+			"",
 			// Serialize
-			jQuery("#login_form").serialize());
-			// (resultDataString) => handleLoginResult(resultDataString));
+			jQuery("#login_form").serialize()
+			// (resultData) => handleLoginResult(resultDataString)
+	);
 }
 
 // Bind the submit action of the form to a handler function
