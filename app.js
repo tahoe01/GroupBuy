@@ -14,6 +14,8 @@ var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var createTeamRouter = require('./routes/createteam');
 var teamProfileRouter = require('./routes/teamprofile');
+var loginRouter = require('./routes/login');
+var createAccountRouter = require('./routes/createaccount');
 
 // MySQL Connection
 var mysqlConnection = require('./common/mysql-connection');
@@ -34,6 +36,8 @@ app.use(bodyParser.json());
 app.use('/', indexRouter);
 app.use('/teamprofile', teamProfileRouter);
 app.use('/createteam', createTeamRouter);
+app.use('/login', loginRouter);
+app.use('/createaccount', createAccountRouter);
 
 // Connect to MySQL
 mysqlConnection.connection.connect();
