@@ -1,5 +1,7 @@
 'use strict';
 
+console.log(window.location.href);
+
 $(function() {
     $(".dropdown-menu .dropdown-item").click(function() {
 

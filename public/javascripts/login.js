@@ -1,4 +1,13 @@
+function handleLoginResult(resultData) {
+	console.log(resultData);
 
+	if (resultData['info'] == 'success') {
+		let userId = resultData['userId'];
+		window.location.replace(`/index?all=''&userId=${userId}`);
+	} else { // user email & password not match
+		jQuery("#login_error_message").text("Wrong email or password. Try again!");
+	}
+}
 
 
 function submitLoginForm(formSubmitEvent){
@@ -12,8 +21,8 @@ function submitLoginForm(formSubmitEvent){
 	jQuery.post(
 			"",
 			// Serialize
-			jQuery("#login_form").serialize()
-			// (resultData) => handleLoginResult(resultDataString)
+			jQuery("#login_form").serialize(),
+			(resultData) => handleLoginResult(resultData)
 	);
 }
 

@@ -7,6 +7,7 @@ const url = require('url');
 var mysqlConnection = require('./../common/mysql-connection.js');
 var router = express.Router();
 var queryResult;
+var userId;
 
 
 var getHandler = function(req, res) {
@@ -14,7 +15,8 @@ var getHandler = function(req, res) {
   const validKeyArr = ["company", "tag", "productName"];
   var query = '';
   
-  if (Object.keys(queryObj).length === 0) {
+  if (Object.keys(queryObj).length === 0 || Object.keys(queryObj)[0] == "all") {
+    userId = queryObj['userId'];
     query = 'select * from Products;';
   } else {
     const searchKey = Object.keys(queryObj)[0];
@@ -45,7 +47,12 @@ function sendQuery(query, res) {
       throw error;
 
     // console.log(results);
-    res.render('index', {retrieveResult: results});
+    if (userId != null) {
+      console.log("current User Id: " + userId);
+      res.render('index', {retrieveResult: results, userId: userId});
+    } else {
+      res.render('index', {retrieveResult: results});
+    }
     // console.log(results);
     // if (query.endsWith("from Products;")) {
     //   res.render('index', {retrieveResult: results});

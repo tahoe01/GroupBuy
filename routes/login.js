@@ -36,15 +36,15 @@ function executeTransaction(reqBody, res) {
       
       if (results.length == 0){
           console.log("invalid login info");
-          res.render('login', {info: "password doesn't match the email"});
+          res.status(200).json({info: "password doesn't match the email"});
           return;
 
       } else {
         console.log("valid info");
         var loginUserId = results[0]["userId"];
         console.log(loginUserId);
-
-        res.redirect(`/index`);
+        res.status(200).json({info: "success", userId: loginUserId});
+        return;
       }
 
 
