@@ -49,7 +49,7 @@ CREATE TABLE TeamPurchase (
 );
 
 CREATE TABLE Reviews (
-    `reviewerId`     INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `reviewerId`     INT UNSIGNED NOT NULL,
     `userId`         INT UNSIGNED NOT NULL,
     `teamId`         INT UNSIGNED NOT NULL,
     `productId`      INT UNSIGNED NOT NULL,
