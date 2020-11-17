@@ -10,14 +10,13 @@ var router = express.Router();
 
 var getHandler = function(req, res) {
   const queryObj = url.parse(req.url, true).query;
+  var currentUserId = queryObj['userId'];
 
   if (queryObj['action'] === 'modifyTeam') {
     const teamId = queryObj['teamId'];
     const userId = queryObj['userId'];
     const productId = queryObj['productId']
     
-    var currentUserId = 1
-    // SELECT teamId, GROUP_CONCAT(SELECT productName FROM Products ) as teamIds FROM UserInTeam GROUP BY teamId
     var getTeamSizes = `SELECT teamId, count(*) as teamSize FROM UserInTeam WHERE teamId = ${teamId} GROUP BY teamId`
     var getTeamData = `SELECT * FROM Teams NATURAL JOIN (${getTeamSizes}) teamSizes WHERE teamId = ${teamId};`
 
@@ -25,9 +24,21 @@ var getHandler = function(req, res) {
       if (error) 
         throw error;
 
-      console.log(teamData)
-      // res.status(200).json({data: teamData});
-      res.render('modifyteam', {teamData: teamData, userId: userId, teamId: teamId});
+      var userIds = `SELECT userId FROM UserInTeam WHERE teamId = ${teamId}`
+      var getUserData = `SELECT * FROM Users WHERE userId in (${userIds});`
+      mysqlConnection.connection.query(getUserData, function (error, userData, fields) {
+        if (error) 
+          throw error;
+
+        var initiatorId = teamData[0].initiatorId
+        var getTeamLeaderData = `SELECT * FROM Users WHERE userId = ${initiatorId};`
+        mysqlConnection.connection.query(getTeamLeaderData, function (error, leaderData, fields) {
+          if (error) 
+            throw error;
+
+        res.render('modifyteam', {teamData: teamData, userData: userData, leaderData: leaderData, userId: userId, teamId: teamId, productId: productId});
+        });
+      });
     });
     return;
   }
@@ -82,15 +93,13 @@ var getHandler = function(req, res) {
     });
   }
   
-  var currentUserId = 1
-  // SELECT teamId, GROUP_CONCAT(SELECT productName FROM Products ) as teamIds FROM UserInTeam GROUP BY teamId
   var getTeamSizes = `SELECT teamId, count(*) as teamSize FROM UserInTeam GROUP BY teamId`
   var getUsersTeamData = `SELECT * FROM Teams NATURAL JOIN TeamPurchase NATURAL JOIN Products NATURAL JOIN (${getTeamSizes}) teamSizes WHERE teamId IN (SELECT teamId FROM UserInTeam WHERE userId=${currentUserId}) ORDER BY teamId ASC;`
 
   mysqlConnection.connection.query(getUsersTeamData, function (error, teamData, fields) {
     if (error) 
       throw error;
-    res.render('teamprofile', {teamData: teamData, currentUserId: currentUserId});
+    res.render('teamprofile', {teamData: teamData, userId: currentUserId});
   });
 }
 

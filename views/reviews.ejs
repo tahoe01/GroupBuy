@@ -5,6 +5,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/javascripts/home.js"></script>
     <title>GroupBuy</title>
 </head>
@@ -43,45 +44,20 @@
       </form>
     </div>
   </nav>
-  <p class="h1" style="text-decoration: none; color:#563D7C; margin-top: 20px; margin-left: 50px;" > Your Teams</p>
+  <p class="h1" style="text-decoration: none; color:#563D7C; margin-top: 20px; margin-left: 50px;" > Your Reviews</p>
   <%
-  teamData.forEach(function(data) {
-    var arr = (data.purchaseDate.toString().split(" "))
-    var date = arr.slice(0, 4).join(' ')
+  reviewData.forEach(function(review) {
   %>
   <div id="content" class="container">
     <div class="jumbotron" style="margin: 20px; padding: 20px;">
-      <div class="d-flex justify-content-around">
-        <div class="d-flex flex-column">
-          <p class="h4" style="text-decoration: none; color:#563D7C" >Team ID: <%=data.teamId %></p>
-          <ul class="list-unstyled">
-            <li style="margin-top: 5px; margin-left: 10px;">Status: <%=data.status%> </li>
-            <li style="margin-top: 5px; margin-left: 10px;">Team Size: <%=data.teamSize%> </li>
-            <li style="margin-top: 5px; margin-left: 10px;">Team Capacity: <%=data.maxGroupSize%> </li>
-            <li style="margin-top: 5px; margin-left: 10px;">Product Name: <%=data.productName%> </li>
-            <li style="margin-top: 5px; margin-left: 10px;">Product Company: <%=data.company%> </li>
-            <li style="margin-top: 5px; margin-left: 10px;">Start Date: <%=date%> </li>
-            <li style="margin-top: 5px; margin-left: 10px;">Monthly Price: <%=data.price%> </li>
-          </ul> 
-        </div>
-        <div class="d-flex flex-column">
-          <p class="h4" style="text-decoration: none; color:#563D7C" >Actions:</p>
-          <ul class="list-unstyled">
-            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=modifyTeam&teamId=<%=data.teamId%>&productId=<%=data.productId%>&userId=<%=userId%>'>Modify Team</a></li>
-            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=leaveTeam&teamId=<%=data.teamId%>&userId=<%=userId%>'>Leave Team</a></li>
-            <%
-            if (data.status == 'inactive') {
-            %>
-            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=activate&teamId=<%=data.teamId%>&userId=<%=userId%>&productId=<%=data.productId%>'>Activate</a></li>
-            <% } else { %>
-            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=deactivate&teamId=<%=data.teamId%>&userId=<%=userId%>&productId=<%=data.productId%>'>Deactivate</a></li>
-            <% } %>
-          </ul> 
-        </div>
-      </div>
+      <p class="h4" style="text-decoration: none; color:#563D7C" >Rating: <%=review.rating %></p>
+      <ul class="list-unstyled">
+        <li style="margin-top: 5px; margin-left: 10px;">Team ID: <%=review.teamId%> </li>
+        <li style="margin-top: 5px; margin-left: 10px;">Product ID: <%=review.productId%> </li>
+        <li style="margin-top: 5px; margin-left: 10px;">Review: <%=review.description%> </li>
+      </ul>  
     </div>
   </div>
   <% }) %>
-  
 </body>
 </html>
