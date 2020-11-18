@@ -3,7 +3,7 @@ function handleLoginResult(resultData) {
 
 	if (resultData['info'] == 'success') {
 		let userId = resultData['userId'];
-		window.location.replace(`/index?all=''&userId=${userId}`);
+		window.location.replace(`/index?userId=${userId}`);
 	} else { // user email & password not match
 		jQuery("#login_error_message").text("Wrong email or password. Try again!");
 	}

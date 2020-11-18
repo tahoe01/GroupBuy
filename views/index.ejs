@@ -20,7 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link text-light" href="/index">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link text-light" href="/index?userId=<%=userId%>">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
           <a class="nav-link text-light" href="/teamprofile?userId=<%=userId%>">Team Profile<span class="sr-only">(current)</span></a>
@@ -48,13 +48,14 @@
   <div id="content" class="container">
     <% for ( x in locals.retrieveResult) { %>
       <div class="jumbotron" style="margin: 20px; padding: 20px;">
-        <a class="display-4" style="text-decoration: none; color:#563D7C" href="<%= locals.retrieveResult[x].link%>" > <%= locals.retrieveResult[x].productName  %> </a>
+        <a class="display-4" style="color:#563D7C" href="<%= locals.retrieveResult[x].link%>" > <%= locals.retrieveResult[x].productName  %> </a>
         <p class="lead">Company: <%= locals.retrieveResult[x].company  %> </p>
         <p class="lead">Tag: <%= locals.retrieveResult[x].tag  %> </p>
         <p class="lead">Price: <%= locals.retrieveResult[x].price  %> </p>
         <hr class="my-4">
         <p><%= locals.retrieveResult[x].description  %></p>
         <form class="team-form form-inline my-2 my-lg-0" action="/createteam" method="POST" action="#">
+          <input class="lead userId" name="userId" value=<%=userId %> hidden>
           <input class="lead productId" name="productId" value=<%= locals.retrieveResult[x].productId  %> hidden>
           <input class="form-control mr-sm-2 teamSize" name="maxGroupSize" type="search" placeholder="Enter max group size" aria-label="Search">
           <button class="btn my-2 my-sm-0 text-light" style="background-color:#563D7C; border-color: #563D7C;" type="submit">Create Team</button>

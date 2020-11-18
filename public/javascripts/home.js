@@ -50,9 +50,6 @@ function submitForm(event) {
 function createTeam(event) {
     console.log("creating");
     event.preventDefault();
-    // let teamSize = $("#teamSize").val().trim();
-    // let productId = $("#productId").text();
-    // console.log(teamSize);
 };
 
 $(document).ready(function() {

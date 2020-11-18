@@ -8,15 +8,16 @@ var mysqlConnection = require('./../common/mysql-connection.js');
 var router = express.Router();
 var queryResult;
 var userId;
+var isLogin;
 
 
 var getHandler = function(req, res) {
+  isLogin = false;
   const queryObj = url.parse(req.url, true).query;
   const validKeyArr = ["company", "tag", "productName"];
   var query = '';
   
-  if (Object.keys(queryObj).length === 0 || Object.keys(queryObj)[0] == "all") {
-    userId = queryObj['userId'];
+  if (Object.keys(queryObj).length === 0 || Object.keys(queryObj)[0] == "userId") {
     query = 'select * from Products;';
   } else {
     const searchKey = Object.keys(queryObj)[0];
@@ -29,6 +30,11 @@ var getHandler = function(req, res) {
     } else if (validKeyArr.includes(searchKey)){
       query = `select * from Products where ${searchKey}="${searchValue}" limit ${offset}, ${limit}`;
     }
+  }
+
+  if (Object.keys(queryObj)[0] == 'userId') {
+    userId = queryObj['userId'];
+    isLogin = true;
   }
 
   // console.log('query:' + query);
@@ -47,19 +53,12 @@ function sendQuery(query, res) {
       throw error;
 
     // console.log(results);
-    if (userId != null) {
+    if (isLogin) {
       console.log("current User Id: " + userId);
       res.render('index', {retrieveResult: results, userId: userId});
-    } else {
-      res.render('index', {retrieveResult: results});
+    } else { // User not log in
+      res.redirect('/');
     }
-    // console.log(results);
-    // if (query.endsWith("from Products;")) {
-    //   res.render('index', {retrieveResult: results});
-    // } else {
-    //   console.log("send data");
-    //   res.send({retrieveResult: results});
-    // }
   });
 }
 
