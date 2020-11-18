@@ -10,78 +10,78 @@
 </head>
 
 <body>
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #563D7C">
-        <a class="navbar-brand text-light" style="font-family: Courgette; font-style: italic; font-weight: bolder;" href="#">GroupBuy</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link text-light" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link text-light" href="/teamprofile">Team Profile<span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
-          <div class="dropdown show">
-            <a class="btn btn-light dropdown-toggle" style="margin-right: 10px;" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</a>     
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <p class="dropdown-item">All</p>
-              <p class="dropdown-item">Product Name</a>
-              <p class="dropdown-item">Company</a>
-              <p class="dropdown-item">Tag</a>
-            </div>
-          </div>
-          <form id="search_form" class="form-inline my-2 my-lg-0" method="get" action="#">
-            <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">search</button>
-          </form>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #563D7C">
+    <a class="navbar-brand text-light" style="font-family: Courgette; font-style: italic; font-weight: bolder;" href="#">GroupBuy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link text-light" href="/index?userId=<%=userId%>">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link text-light" href="/teamprofile?userId=<%=userId%>">Team Profile<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link text-light" href="/reviews?userId=<%=userId%>">Reviews<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <div class="dropdown show">
+        <a class="btn btn-light dropdown-toggle" style="margin-right: 10px;" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</a>     
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <p class="dropdown-item">All</p>
+          <p class="dropdown-item">Product Name</a>
+          <p class="dropdown-item">Company</a>
+          <p class="dropdown-item">Tag</a>
         </div>
-      </nav>
-      <table border="1">
-        <tr>
-            <th>Team ID</th>
-            <th>Status</th>
-            <th>Team Size</th>
-            <th>Total Capacity</th>
-            <th>Product Name</th>
-            <th>Company</th>
-            <th>Start Date</th>
-            <th>Price</th>
-            <th></th>
-            <!-- <th></th>
-            <th></th> -->
-            <th></th>
-        </tr>
-          
-        <%
-        if(teamData && teamData.length != 0){
-        teamData.forEach(function(data){
-          <!-- var arr = (data.purchaseDate.toString().split(" ")) -->
-          <!-- var date = arr.slice(0, 4).join(' ') -->
-        %>
-        <tr>
-            <td><%=data.teamId %></td>
-            <td><%=data.status %></td>
-            <td><%=data.teamSize %></td>
-            <td><%=data.maxGroupSize %></td>
-            <td><%=data.productName %></td>
-            <td><%=data.company %></td>
-            <td><%=data.price %></td>
-            <td><a href='/teamprofile?action=modifyTeam&teamId=<%=data.teamId%>&userId=<%=currentUserId%>'>Modify Team</a></td>
-            <!-- <td><a href='/teamprofile?action=activate&teamId=<%=data.teamId%>&userId=<%=currentUserId%>&productId=<%=data.productId%>'>Activate</a></td>
-            <td><a href='/teamprofile?action=deactivate&teamId=<%=data.teamId%>&userId=<%=currentUserId%>&productId=<%=data.productId%>>'>Deactivate</a></td> -->
-            <td><a href='/teamprofile?action=leaveTeam&teamId=<%=data.teamId%>&userId=<%=currentUserId%>'>Leave Team</a></td>
-        </tr>
-        <% }) %>
-        <% } else{ %>
-            <tr>
-                <td colspan="2">No Data Found</td>
-            </tr>
-        <% } %>
-      </table>
-      
+      </div>
+      <form id="search_form" class="form-inline my-2 my-lg-0" method="get" action="#">
+        <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">search</button>
+      </form>
+    </div>
+  </nav>
+  <p class="h1" style="text-decoration: none; color:#563D7C; margin-top: 20px; margin-left: 50px;" > Your Teams</p>
+  <%
+  teamData.forEach(function(data) {
+    var arr = (data.purchaseDate.toString().split(" "))
+    var date = arr.slice(0, 4).join(' ')
+  %>
+  <div id="content" class="container">
+    <div class="jumbotron" style="margin: 20px; padding: 20px;">
+      <div class="d-flex justify-content-around">
+        <div class="d-flex flex-column">
+          <p class="h4" style="text-decoration: none; color:#563D7C" >Team ID: <%=data.teamId %></p>
+          <ul class="list-unstyled">
+            <li style="margin-top: 5px; margin-left: 10px;">Status: <%=data.status%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Team Size: <%=data.teamSize%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Team Capacity: <%=data.maxGroupSize%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Product Name: <%=data.productName%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Product Company: <%=data.company%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Start Date: <%=date%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Monthly Price: <%=data.price%> </li>
+          </ul> 
+        </div>
+        <div class="d-flex flex-column">
+          <p class="h4" style="text-decoration: none; color:#563D7C" >Actions:</p>
+          <ul class="list-unstyled">
+            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=modifyTeam&teamId=<%=data.teamId%>&productId=<%=data.productId%>&userId=<%=userId%>'>Modify Team</a></li>
+            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=leaveTeam&teamId=<%=data.teamId%>&userId=<%=userId%>'>Leave Team</a></li>
+            <%
+            if (data.status == 'inactive') {
+            %>
+            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=activate&teamId=<%=data.teamId%>&userId=<%=userId%>&productId=<%=data.productId%>'>Activate</a></li>
+            <% } else { %>
+            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=deactivate&teamId=<%=data.teamId%>&userId=<%=userId%>&productId=<%=data.productId%>'>Deactivate</a></li>
+            <% } %>
+          </ul> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }) %>
+  
 </body>
 </html>

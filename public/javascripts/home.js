@@ -1,5 +1,7 @@
 'use strict';
 
+console.log(window.location.href);
+
 $(function() {
     $(".dropdown-menu .dropdown-item").click(function() {
 
@@ -48,9 +50,6 @@ function submitForm(event) {
 function createTeam(event) {
     console.log("creating");
     event.preventDefault();
-    // let teamSize = $("#teamSize").val().trim();
-    // let productId = $("#productId").text();
-    // console.log(teamSize);
 };
 
 $(document).ready(function() {

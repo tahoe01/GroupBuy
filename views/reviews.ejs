@@ -44,25 +44,20 @@
       </form>
     </div>
   </nav>
-
+  <p class="h1" style="text-decoration: none; color:#563D7C; margin-top: 20px; margin-left: 50px;" > Your Reviews</p>
+  <%
+  reviewData.forEach(function(review) {
+  %>
   <div id="content" class="container">
-    <% for ( x in locals.retrieveResult) { %>
-      <div class="jumbotron" style="margin: 20px; padding: 20px;">
-        <a class="display-4" style="color:#563D7C" href="<%= locals.retrieveResult[x].link%>" > <%= locals.retrieveResult[x].productName  %> </a>
-        <p class="lead">Company: <%= locals.retrieveResult[x].company  %> </p>
-        <p class="lead">Tag: <%= locals.retrieveResult[x].tag  %> </p>
-        <p class="lead">Price: <%= locals.retrieveResult[x].price  %> </p>
-        <hr class="my-4">
-        <p><%= locals.retrieveResult[x].description  %></p>
-        <form class="team-form form-inline my-2 my-lg-0" action="/createteam" method="POST" action="#">
-          <input class="lead userId" name="userId" value=<%=userId %> hidden>
-          <input class="lead productId" name="productId" value=<%= locals.retrieveResult[x].productId  %> hidden>
-          <input class="form-control mr-sm-2 teamSize" name="maxGroupSize" type="search" placeholder="Enter max group size" aria-label="Search">
-          <button class="btn my-2 my-sm-0 text-light" style="background-color:#563D7C; border-color: #563D7C;" type="submit">Create Team</button>
-        </form>
-
-      </div>                                
-    <% } %>
+    <div class="jumbotron" style="margin: 20px; padding: 20px;">
+      <p class="h4" style="text-decoration: none; color:#563D7C" >Rating: <%=review.rating %></p>
+      <ul class="list-unstyled">
+        <li style="margin-top: 5px; margin-left: 10px;">Team ID: <%=review.teamId%> </li>
+        <li style="margin-top: 5px; margin-left: 10px;">Product ID: <%=review.productId%> </li>
+        <li style="margin-top: 5px; margin-left: 10px;">Review: <%=review.description%> </li>
+      </ul>  
+    </div>
   </div>
+  <% }) %>
 </body>
 </html>

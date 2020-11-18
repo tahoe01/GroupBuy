@@ -20,10 +20,10 @@ function executeTransaction(reqBody, res) {
       throw err; 
     }
     console.log("INFO I GET");
-    reqBody.userId=1; //hard code user id for now
+    console.log(reqBody.userId);
     console.log(reqBody.productId);
     console.log(reqBody.maxGroupSize);
-    const insertTeamQuery = `insert into Teams(status, maxGroupSize, initiatorId) values("incomplete", ${reqBody.maxGroupSize}, ${reqBody.userId})`;
+    const insertTeamQuery = `insert into Teams(status, maxGroupSize, initiatorId) values("active", ${reqBody.maxGroupSize}, ${reqBody.userId})`;
     const findTeamIdQuery = 'select max(teamId) as maxTeamId from Teams';
     
     mysqlConnection.connection.query(insertTeamQuery, function (error, results, fields) {
@@ -53,7 +53,8 @@ function executeTransaction(reqBody, res) {
               throw error;
             });
           }
-          const insertTeamPurchaseQuery = `insert into TeamPurchase(teamId, productId) values (${maxTeamId}, ${reqBody.productId})`;
+          let purchaseDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+          const insertTeamPurchaseQuery = `insert into TeamPurchase(teamId, productId, purchaseDate) values (${maxTeamId}, ${reqBody.productId}, '${purchaseDate}')`;
           
           mysqlConnection.connection.query(insertTeamPurchaseQuery, function (error, results, fields) {
             if (error) {
@@ -70,8 +71,7 @@ function executeTransaction(reqBody, res) {
                   throw err;
                 });
               }
-              // res.render('index');
-              res.redirect('/teamprofile');
+              res.redirect(`/teamprofile?userId=${reqBody.userId}`);
             });
 
           });

@@ -14,6 +14,9 @@ var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var createTeamRouter = require('./routes/createteam');
 var teamProfileRouter = require('./routes/teamprofile');
+var loginRouter = require('./routes/login');
+var createAccountRouter = require('./routes/createaccount');
+var reviewsRouter = require('./routes/reviews');
 
 // MySQL Connection
 var mysqlConnection = require('./common/mysql-connection');
@@ -31,9 +34,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // API path registration
-app.use('/', indexRouter);
+app.use('/', loginRouter);
+app.use('/index', indexRouter);
 app.use('/teamprofile', teamProfileRouter);
 app.use('/createteam', createTeamRouter);
+app.use('/createaccount', createAccountRouter);
+app.use('/reviews', reviewsRouter);
 
 // Connect to MySQL
 mysqlConnection.connection.connect();
