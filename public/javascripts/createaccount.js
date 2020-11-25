@@ -1,7 +1,7 @@
 function handleLoginResult(resultData) {
 	console.log(resultData);
     let userId = resultData['userId'];
-    window.location.replace(`/index?all=''&userId=${userId}`);
+    window.location.replace(`/index?userId=${userId}`);
 }
 
 

@@ -13,33 +13,39 @@ var getHandler = function(req, res) {
     
     const queryObj = url.parse(req.url, true).query;
 
-    if (queryObj['productId'] != null) { //localhost:8080/jointeam?UserId=1&productId=1
+    if (queryObj['productId'] != null) { //localhost:8080/jointeam?userId=1&productId=1
         const productId = queryObj["productId"];
         const userId = queryObj['userId'];
 
         console.log("pid ", productId);
-        var query = `select T.teamId, T.maxGroupSize, U.userId, U.firstName, U.lastName from TeamPurchase as TP natural join Teams as T natural join UserInTeam natural join Users as U where TP.productId=${productId} and T.status = "active"`;
+        var query = `select T.teamId, T.maxGroupSize, U.userId, U.firstName, U.lastName, U.email from TeamPurchase as TP natural join Teams as T join Users as U on T.initiatorId = U.userId where TP.productId=${productId} and T.status = "active";`;
         console.log("query ", query);
-        sendQuery(query, res);
+        sendQuery(query, res, userId, "find");
 
     } else if (queryObj['action'] == 'joinTeam') { //localhost:8080/jointeam?action=joinTeam&userId=2&teamId=4
         const teamId = queryObj['teamId'];
         const userId = queryObj['userId'];
-        const joinTeamQuery = `insert into UserInTeam(userId, teamId) values(${userId}, ${teamId})`;
-        sendQuery(joinTeamQuery, res);
+        console.log(userId);
+        console.log(teamId);
+        
+        const joinTeamQuery = `insert into UserInTeam(userId, teamId) values(${userId}, ${teamId});`;
+        console.log(joinTeamQuery);
+        sendQuery(joinTeamQuery, res, userId, queryObj['action']);
     }
 }
 
-function sendQuery(query, res) {
+function sendQuery(query, res, userId, action) {
 
   mysqlConnection.connection.query(query, function (error, results, fields) {
     if (error) 
       throw error;
 
     console.log(results);
-    res.status(200).json({retrieveResult: results});
-    
-    //res.render('jointeam', {retrieveResult: results});
+    if (action == 'find') {
+      res.render('teamlist', {retrieveResult: results, userId: userId});
+    } else {
+      res.redirect('/teamprofile?userId=' + userId);
+    }
     
   });
 }

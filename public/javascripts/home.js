@@ -63,12 +63,24 @@ $('.team_form').submit(function(event) {
         console.log(jQuery(this).serialize());
         jQuery.post(
             "/createteam",
-            jQuery(this).serialize()
+            jQuery(this).serialize(),
+            function(data) {
+                console.log("get back data");
+                var newDoc = document.open('text/html', 'replace');
+                newDoc.write(data);
+                newDoc.close();
+            },
         )
     } else if (buttonPressed == 'findTeamButton') {
         jQuery.get(
             "/jointeam",
-            jQuery(this).serialize()
+            jQuery(this).serialize(),
+            function(data) {
+                console.log("get back data");
+                var newDoc = document.open('text/html', 'replace');
+                newDoc.write(data);
+                newDoc.close();
+            },
         )
     }     
 });

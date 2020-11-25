@@ -23,8 +23,8 @@ function executeTransaction(reqBody, res) {
     console.log(reqBody.userId);
     console.log(reqBody.productId);
     console.log(reqBody.maxGroupSize);
-    const insertTeamQuery = `insert into Teams(status, maxGroupSize, initiatorId) values("active", ${reqBody.maxGroupSize}, ${reqBody.userId})`;
-    const findTeamIdQuery = 'select max(teamId) as maxTeamId from Teams';
+    const insertTeamQuery = `insert into Teams(status, maxGroupSize, initiatorId) values("active", ${reqBody.maxGroupSize}, ${reqBody.userId});`;
+    const findTeamIdQuery = 'select max(teamId) as maxTeamId from Teams;';
     
     mysqlConnection.connection.query(insertTeamQuery, function (error, results, fields) {
 
@@ -43,7 +43,7 @@ function executeTransaction(reqBody, res) {
           });
         }
         const maxTeamId = results[0]["maxTeamId"];
-        const insertUserInTeamQuery = `insert into UserInTeam(userId, teamId) values (${reqBody.userId}, ${maxTeamId})`;
+        const insertUserInTeamQuery = `insert into UserInTeam(userId, teamId) values (${reqBody.userId}, ${maxTeamId});`;
         console.log('maxTeamId:' + maxTeamId);
 
         mysqlConnection.connection.query(insertUserInTeamQuery, function (error, results, fields) {
@@ -54,7 +54,7 @@ function executeTransaction(reqBody, res) {
             });
           }
           let purchaseDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
-          const insertTeamPurchaseQuery = `insert into TeamPurchase(teamId, productId, purchaseDate) values (${maxTeamId}, ${reqBody.productId}, '${purchaseDate}')`;
+          const insertTeamPurchaseQuery = `insert into TeamPurchase(teamId, productId, purchaseDate) values (${maxTeamId}, ${reqBody.productId}, '${purchaseDate}');`;
           
           mysqlConnection.connection.query(insertTeamPurchaseQuery, function (error, results, fields) {
             if (error) {
@@ -71,6 +71,7 @@ function executeTransaction(reqBody, res) {
                   throw err;
                 });
               }
+              console.log("redirect");
               res.redirect(`/teamprofile?userId=${reqBody.userId}`);
             });
 
