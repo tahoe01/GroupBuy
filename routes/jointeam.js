@@ -36,17 +36,37 @@ var getHandler = function(req, res) {
 
 function sendQuery(query, res, userId, action) {
 
-  mysqlConnection.connection.query(query, function (error, results, fields) {
-    if (error) 
-      throw error;
-
-    console.log(results);
-    if (action == 'find') {
-      res.render('teamlist', {retrieveResult: results, userId: userId});
-    } else {
-      res.redirect('/teamprofile?userId=' + userId);
+  mysqlConnection.connection.beginTransaction(function(err) {
+    if (err) { 
+      throw err; 
     }
-    
+
+    mysqlConnection.connection.query(query, function (error, results, fields) {
+      if (error) {
+        res.status(500).json({ message : "failure"});
+        return mysqlConnection.connection.rollback(function() {
+          throw error;
+        });
+      }
+      console.log(results);
+
+      mysqlConnection.connection.commit(function(err) {
+        if (err) {
+          res.status(500).json({ message : "failure"});
+          return mysqlConnection.connection.rollback(function() {
+            throw err;
+          });
+        }
+        if (action == 'find') {
+          res.render('teamlist', {retrieveResult: results, userId: userId});
+        } else {
+          res.redirect('/teamprofile?userId=' + userId);
+        }
+      });
+
+    });
+
+
   });
 }
 
