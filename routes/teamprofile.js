@@ -15,7 +15,7 @@ var getHandler = function(req, res) {
   if (queryObj['action'] === 'modifyTeam') {
     const teamId = queryObj['teamId'];
     const userId = queryObj['userId'];
-    const productId = queryObj['productId']
+    const productId = queryObj['productId'];
     
     var getTeamSizes = `SELECT teamId, count(*) as teamSize FROM UserInTeam WHERE teamId = ${teamId} GROUP BY teamId`
     var getTeamData = `SELECT * FROM Teams NATURAL JOIN (${getTeamSizes}) teamSizes WHERE teamId = ${teamId};`
