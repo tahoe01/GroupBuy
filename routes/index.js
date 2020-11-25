@@ -32,7 +32,7 @@ var getHandler = function(req, res) {
     }
   }
 
-  if (Object.keys(queryObj)[0] == 'userId') {
+  if (Object.keys(queryObj)[0] == 'userId' || Object.keys(queryObj)[1] == 'userId') {
     userId = queryObj['userId'];
     isLogin = true;
   }
