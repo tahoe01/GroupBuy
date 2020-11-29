@@ -40,7 +40,7 @@
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link text-light" href="/fridens?userId=<%=userId%>">Friends<span
+          <a class="nav-link text-light" href="/friends?userId=<%=userId%>">Friends<span
               class="sr-only">(current)</span></a>
         </li>
       </ul>
@@ -55,6 +55,7 @@
         </div>
       </div>
       <form id="search_form" class="form-inline my-2 my-lg-0" method="get" action="#">
+        <label id="userId" hidden><%= userId%></label>
         <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">search</button>
       </form>
