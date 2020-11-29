@@ -27,10 +27,6 @@
         <li class="nav-item active">
           <a class="nav-link text-light" href="/reviews?userId=<%=userId%>">Reviews<span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link text-light" href="/friends?userId=<%=userId%>">Friends<span
-              class="sr-only">(current)</span></a>
-        </li>
       </ul>
       <div class="dropdown show">
         <a class="btn btn-light dropdown-toggle" style="margin-right: 10px;" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</a>     
@@ -42,26 +38,25 @@
         </div>
       </div>
       <form id="search_form" class="form-inline my-2 my-lg-0" method="get" action="#">
+        <label id="userId" hidden><%= userId%></label>
         <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">search</button>
       </form>
     </div>
   </nav>
-  <p class="h1" style="text-decoration: none; color:#563D7C; margin-top: 20px; margin-left: 50px;" > Your Reviews</p>
-  <%
-  reviewData.forEach(function(review) {
-  %>
-  <div id="content" class="container">
-    <div class="jumbotron" style="margin: 20px; padding: 20px;">
-      <p class="h4" style="text-decoration: none; color:#563D7C" >Rating: <%=review.rating %></p>
-      <ul class="list-unstyled">
-        <li style="margin-top: 5px; margin-left: 10px;">Team ID: <%=review.teamId%> </li>
-        <li style="margin-top: 5px; margin-left: 10px;">Product ID: <%=review.productId%> </li>
-        <li style="margin-top: 5px; margin-left: 10px;">Review: <%=review.description%> </li>
-      </ul>  
-    </div>
+
+  <div class="container">
+    <% for ( x in locals.retrieveResult) { %>
+      <div class="jumbotron" style="margin: 20px; padding: 20px;">
+        <p class="lead">Team ID: <%= locals.retrieveResult[x].teamId  %> </p>
+        <p class="lead">Initiator Name: <%= locals.retrieveResult[x].firstName + " " + locals.retrieveResult[x].lastName  %> </p>
+        <p class="lead">Initiator Email: <%= locals.retrieveResult[x].email  %> </p>
+        <p class="lead">Initiator ID: <%= locals.retrieveResult[x].userId  %> </p>
+        <p class="lead">Max Group Capacity: <%= locals.retrieveResult[x].maxGroupSize %> </p>
+        <a class="btn btn-outline-light" href="/jointeam?action=joinTeam&userId=<%= locals.userId%>&teamId=<%= locals.retrieveResult[x].teamId%>" style="background-color:#563D7C; border-color: #563D7C;" role="button">Join team</a>
+        <hr class="my-4">                              
+    <% } %>
   </div>
-  <% }) %>
 
   <script src="/javascripts/home.js"></script>
 </body>

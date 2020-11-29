@@ -15,7 +15,7 @@ var getHandler = function(req, res) {
   if (queryObj['action'] === 'modifyTeam') {
     const teamId = queryObj['teamId'];
     const userId = queryObj['userId'];
-    const productId = queryObj['productId']
+    const productId = queryObj['productId'];
     
     var getTeamSizes = `SELECT teamId, count(*) as teamSize FROM UserInTeam WHERE teamId = ${teamId} GROUP BY teamId`
     var getTeamData = `SELECT * FROM Teams NATURAL JOIN (${getTeamSizes}) teamSizes WHERE teamId = ${teamId};`
@@ -93,12 +93,15 @@ var getHandler = function(req, res) {
     });
   }
   
+  
   var getTeamSizes = `SELECT teamId, count(*) as teamSize FROM UserInTeam GROUP BY teamId`
   var getUsersTeamData = `SELECT * FROM Teams NATURAL JOIN TeamPurchase NATURAL JOIN Products NATURAL JOIN (${getTeamSizes}) teamSizes WHERE teamId IN (SELECT teamId FROM UserInTeam WHERE userId=${currentUserId}) ORDER BY teamId ASC;`
+  console.log(getUsersTeamData);
 
   mysqlConnection.connection.query(getUsersTeamData, function (error, teamData, fields) {
     if (error) 
       throw error;
+    console.log(teamData);
     res.render('teamprofile', {teamData: teamData, userId: currentUserId});
   });
 }

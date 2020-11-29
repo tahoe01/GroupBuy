@@ -27,12 +27,15 @@ var getHandler = function (req, res) {
 
     if (searchKey == "all") {
       query = `select * from Products where productName="${searchValue}" or tag="${searchValue}" or company="${searchValue}";`
-    } else if (validKeyArr.includes(searchKey)) {
+
+      // query = `select * from Products where edth(productName,"${searchValue}",2) or edth(tag,"${searchValue}", 3) or edth(company, "${searchValue}", 3);`
+    } else if (validKeyArr.includes(searchKey)){
       query = `select * from Products where ${searchKey}="${searchValue}" limit ${offset}, ${limit}`;
+      // query = `select * from Products where edth(${searchKey},"${searchValue}",2) limit ${offset}, ${limit}`;
     }
   }
 
-  if (Object.keys(queryObj)[0] == 'userId') {
+  if (Object.keys(queryObj)[0] == 'userId' || Object.keys(queryObj)[1] == 'userId') {
     userId = queryObj['userId'];
     isLogin = true;
   }

@@ -30,6 +30,7 @@ var loginRouter = require('./routes/login');
 var createAccountRouter = require('./routes/createaccount');
 var reviewsRouter = require('./routes/reviews');
 var friendsRouter = require('./routes/friends');
+var joinTeamRouter = require('./routes/jointeam');
 
 // MySQL Connection
 var mysqlConnection = require('./common/mysql-connection');
@@ -64,6 +65,7 @@ app.use('/createteam', createTeamRouter);
 app.use('/createaccount', createAccountRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/friends', friendsRouter);
+app.use('/jointeam', joinTeamRouter);
 
 // Connect to MySQL
 mysqlConnection.connection.connect();

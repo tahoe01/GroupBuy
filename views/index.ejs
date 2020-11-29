@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="/javascripts/home.js"></script>
   <title>GroupBuy</title>
-</head>
+
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #563D7C">
@@ -55,6 +55,7 @@
         </div>
       </div>
       <form id="search_form" class="form-inline my-2 my-lg-0" method="get" action="#">
+        <label id="userId" hidden><%= userId%></label>
         <input id="search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">search</button>
       </form>
@@ -123,9 +124,10 @@
         <p class="lead">Price: <%= locals.retrieveResult[x].price  %> </p>
         <hr class="my-4">
         <p><%= locals.retrieveResult[x].description  %></p>
-        <form class="team-form form-inline my-2 my-lg-0" action="/createteam" method="POST" action="#">
+        <form class="team_form form-inline my-2 my-lg-0">
           <input class="lead userId" name="userId" value=<%=userId %> hidden>
           <input class="lead productId" name="productId" value=<%= locals.retrieveResult[x].productId  %> hidden>
+<<<<<<< HEAD
           <input class="form-control mr-sm-2 teamSize" name="maxGroupSize" type="search"
             placeholder="Enter max group size" aria-label="Search">
           <button class="btn my-2 my-sm-0 text-light" style="background-color:#563D7C; border-color: #563D7C;"
@@ -135,7 +137,18 @@
       </div>
       <% } %>
     </div>
+=======
+          <input class="form-control mr-sm-2 teamSize" name="maxGroupSize" type="search" placeholder="Enter max group size" aria-label="Search">
+          <button class="submitButton btn my-2 my-sm-0 text-light" style="background-color:#563D7C; border-color: #563D7C;" name="createButton" type="submit">Create Team</button>
+          <button class="submitButton btn my-2 my-sm-0 text-light" style="background-color:#563D7C; border-color: #563D7C; margin-left: 5px;" name="findTeamButton" type="submit">Find available teams</button>
+        </form>
+      </div>                                
+    <% } %>
+>>>>>>> a45ded3854a1b0450a95ea48052b4d8f40b7b646
   </div>
+
+  <script src="/javascripts/home.js"></script>
+
 </body>
 
 </html>
