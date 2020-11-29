@@ -17,7 +17,17 @@ VALUES
  'Office,Tools,Technology', 'For PC, Mac, iOS, and Android. For up to 6 people. 1TB cloud storage for each person. One-month free traial. $99.99/year down to $16.67/year for each person. Or $9.99/month down to $1.67/month for each person.'),
 
 ('McAfee AntiVirus Unlimited', 'McAfee', 29.99, 'https://www.mcafee.com/en-us/for-home.html',
- 'Office,Security,Technology', 'Up to 10 devices. $29.99/year for 2-Year subscription. Protect against viruses, malware and online threats.');
+ 'Office,Security,Technology', 'Up to 10 devices. $29.99/year for 2-Year subscription. Protect against viruses, malware and online threats.'),
+
+('Amazon Music Family', 'Amazon', 14.99, 'https://www.amazon.com/music/unlimited/family', 
+'Music,Entertainment', 'Up to 6 people.'),
+
+('Amazon Video Prime Family', 'Amazon', 17.99,  'https://www.amazon.com/gp/video/getstarted',
+ 'Video,Entertainment', 'Up to 6 accounts.'),
+
+('SpamTitan 100-user Plan', 'TitanHQ', 115, 'https://www.titanhq.com/pricing/?product_type=spamtitan',
+ 'Office,Security,Technology', 'Access for 100 users. Down to $1.15 per user monthly.');
 
 INSERT INTO Users VALUES(1, "Dayue", "Bai", "dayueb2@illinois.edu", "gryffindor", 12345678); 
+INSERT INTO Users VALUES(2, "Yuan", "Sun", "yuansun8uiuc@163.com", "123456", 123456);
 INSERT INTO Reviews VALUES (2, 1, 1, 2, 6, 'Test Review 2');
