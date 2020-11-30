@@ -52,7 +52,7 @@ var getHandler = function(req, res) {
     return;
   }
 
-  var getReviews = `SELECT * FROM Reviews WHERE userId = ${userId}`
+  var getReviews = `SELECT R.teamId as teamId, R.rating as rating, P.productName as productName, R.description as description FROM (Reviews R JOIN Products P ON R.productId = P.productId) WHERE userId = ${userId}`
 
   mysqlConnection.connection.query(getReviews, function (error, reviewData, fields) {
     if (error) 
