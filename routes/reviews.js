@@ -13,13 +13,14 @@ var getHandler = function(req, res) {
 
   if (queryObj['action'] === 'submitReview') {
     const teamId = queryObj['teamId'];
-    const reviewerId = queryObj['reviewerId'];
+    const reviewerId = queryObj['userId'];
     const userId = queryObj['userId'];
+    const revieweeId = queryObj['revieweeId'];
     const rating = queryObj['rating'];
     const review = queryObj['review'];
     const productId = queryObj['productId']
 
-    var update = `INSERT INTO Reviews(reviewerId, userId, teamId, productId, rating, description) VALUES(${reviewerId}, ${userId}, ${teamId}, ${productId}, ${rating}, '${review}')`;
+    var update = `INSERT INTO Reviews(reviewerId, userId, teamId, productId, rating, description) VALUES(${reviewerId}, ${revieweeId}, ${teamId}, ${productId}, ${rating}, '${review}')`;
     mysqlConnection.connection.query(update, function (error, data, fields) {
       if (error) 
         throw error;
