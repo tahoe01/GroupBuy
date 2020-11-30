@@ -78,3 +78,16 @@ server.listen(8080, function() {
 });
 
 // TODO: close MySQL connection
+
+// db.followCollection.update(
+//   {
+//     "userId": "4"
+//   },
+//   {
+//     $push: {
+//       "following": "4"
+//     }
+//   }
+// )
+
+// db.followCollection.find({userId: "1"}).size()
