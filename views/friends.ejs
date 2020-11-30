@@ -13,6 +13,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="/javascripts/home.js"></script>
+  <script src="https://unpkg.com/gojs/release/go-debug.js"></script>
   <title>GroupBuy</title>
 </head>
 
@@ -66,7 +67,7 @@
   <div id="content" class="container">
     <div class="jumbotron" style="margin: 20px; padding: 20px;">
       <h4 style="text-decoration: none; color:#563D7C; margin-top: 20px">Follow List</h4>
-      <ul class="list-unstyled"; style="margin-left: 20px">
+      <ul class="list-unstyled" ; style="margin-left: 20px">
         <%
           var list = '';
           for (i = 0; i < friends.length; i++) {
@@ -75,8 +76,69 @@
         %>
         <%- list %>
       </ul>
+    </div>
   </div>
+
+  <!-- graph ---------------------------------------->
+  <div class="jumbotron" style="margin: 20px 60px; padding: 20px;">
+    <h4 style="text-decoration: none; color:#563D7C; margin-top: 20px">Social Network</h4>
+
+    <!-- Load go.js -->
+
+    <!-- The DIV for the Diagram needs an explicit size or else we won't see anything.
+           This also adds a border to help see the edges of the viewport. -->
+    <div id="myDiagramDiv" style="width:800px; height:400px"></div>
+
+
+    <script>
+      var $ = go.GraphObject.make;
+      var myDiagram =
+        $(go.Diagram, "myDiagramDiv",
+          { "undoManager.isEnabled": true });
+
+      // the template we defined earlier
+      myDiagram.nodeTemplate =
+        $(go.Node, "Horizontal",
+          { background: "#563D7C" },
+          // $(go.Picture,
+          //   { margin: 10, width: 50, height: 50, background: "red" },
+          //   new go.Binding("source")),
+          $(go.TextBlock, "Default Text",
+            { margin: 12, stroke: "white", font: "bold 16px sans-serif" },
+            new go.Binding("text", "name"))
+        );
+
+      var model = $(go.GraphLinksModel);
+      nodes = [];
+      // for (i = 0; i < friends.length; i++) {
+      //   nodes.push( {key: friends[i].userId, name: friends[i].userId} );
+      // }
+      nodes.push({ key: "1", name: "Tom" });
+      nodes.push({ key: "2", name: "Abdu" });
+      nodes.push({ key: "3", name: "Sue" });
+      nodes.push({ key: "4", name: "Ellen" });
+      model.nodeDataArray = nodes;
+      // model.nodeDataArray = [
+      //   { key: "1", name: "1" },
+      //   { key: "2", name: "2" },
+      //   { key: "3", name: "3" }
+      // ];
+      model.linkDataArray = [
+        { from: "1", to: "2" },
+        { from: "1", to: "3" },
+        { from: "1", to: "4" },
+        { from: "2", to: "1" },
+        { from: "2", to: "3" },
+        { from: "3", to: "1" },
+        { from: "3", to: "2" },
+        { from: "4", to: "2" }
+      ];
+      myDiagram.model = model;
+    </script>
+    
   </div>
+
+  <!--^^ d3 graph --------------------------------------->
 
 </body>
 
