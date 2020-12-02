@@ -17,6 +17,7 @@ VALUES
  'Office', 'For PC, Mac, iOS, and Android. For up to 6 people. 1TB cloud storage for each person. One-month free traial. $99.99/year down to $16.67/year for each person. Or $9.99/month down to $1.67/month for each person.'),
 
 ('McAfee AntiVirus Unlimited', 'McAfee', 29.99, 'https://www.mcafee.com/en-us/for-home.html',
+
  'Office', 'Up to 10 devices. $29.99/year for 2-Year subscription. Protect against viruses, malware and online threats.'),
 
 ('Amazon Music Family', 'Amazon', 14.99, 'https://www.amazon.com/music/unlimited/family',
@@ -88,3 +89,4 @@ INSERT INTO Users VALUES(7, "f7", "l7", "7@uiuc.edu", "uiuc", 12);
 INSERT INTO Users VALUES(8, "f8", "l8", "8@uiuc.edu", "uiuc", 1); 
 INSERT INTO Users VALUES(9, "f9", "l9", "9@uiuc.edu", "uiuc", 949); 
 INSERT INTO Users VALUES(10, "f10", "l10", "10@uiuc.edu", "uiuc", 101); 
+

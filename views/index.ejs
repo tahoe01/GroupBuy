@@ -33,6 +33,10 @@
           <a class="nav-link text-light" href="/reviews?userId=<%=userId%>">Reviews<span
               class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link text-light" href="/friends?userId=<%=userId%>">Friends<span
+              class="sr-only">(current)</span></a>
+        </li>
       </ul>
       <div class="dropdown show">
         <a class="btn btn-light dropdown-toggle" style="margin-right: 10px;" href="" role="button" id="dropdownMenuLink"
@@ -94,10 +98,10 @@
         <div class="card-body">
           <ul class="list-unstyled">
             <% for ( x in locals.rankingResult_2) { %>
-            <li class="lead">
-              <span style="float:left"><%= locals.rankingResult_2[x].productName %></span>
-              <span style="float:right"><%= locals.rankingResult_2[x].numPurchase %></span>
-            </li>
+              <li class="lead">
+                <span style="float:left"><%= locals.rankingResult_2[x].productName %></span>
+                <span style="float:right"><%= locals.rankingResult_2[x].numPurchase %></span>
+              </li>
             <% } %>
           </ul>
         </div>
@@ -126,6 +130,7 @@
     </div>
 
   </div>
+
   <script src="/javascripts/home.js"></script>
 
 </body>

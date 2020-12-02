@@ -26,6 +26,9 @@
             <li class="nav-item active">
               <a class="nav-link text-light" href="/reviews?userId=<%=userId%>">Reviews<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link text-light" href="/friends?userId=<%=userId%>">Friends<span class="sr-only">(current)</span></a>
+            </li>
           </ul>
           <div class="dropdown show">
             <a class="btn btn-light dropdown-toggle" style="margin-right: 10px;" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</a>     
@@ -60,7 +63,8 @@
             %>
               <li style="margin-top: 5px;">
                 <%= userData[x].firstName%> <%= userData[x].lastName%>
-                <button class="button_active" style="margin-left: 25px; margin-right: 25px;" onclick="location.href='/teamprofile?action=removeUser&teamId=<%=teamId%>&userId=<%=userId%>'">Remove User</button>
+                <button class="button_active" style="margin-left: 25px; margin-right: 17px;" onclick="location.href='/teamprofile?action=removeUser&teamId=<%=teamId%>&userId=<%=userId%>'">Remove User</button>
+                <button class="button_active" style="margin-left: 0px; margin-right: 17px;" onclick="location.href='/friends?action=followUser&userId=<%=userId%>&followedUserId=<%=userData[x].userId%>'">Follow User</button>
                 <%= 'Review:  '%>
                 <input type="text" id="<%= reviewTextInputId%>"/>
                 <%= 'Rating:  '%>
