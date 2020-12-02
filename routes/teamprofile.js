@@ -75,10 +75,24 @@ var getHandler = function(req, res) {
     else if (queryObj['action'] === 'deactivate')
       var query = `UPDATE Teams SET status = 'inactive' WHERE teamId = ${teamId}`;
 
-    mysqlConnection.connection.query(query, function (error, teamData, fields) {
-      if (error) 
-        throw error;
-    });
+      mysqlConnection.connection.beginTransaction(function(err) {
+        if (err) { 
+          throw err; 
+        }
+        mysqlConnection.connection.query(query, function (error, teamData, fields) {
+          if (error) 
+            throw error;
+  
+          mysqlConnection.connection.commit(function(err) {
+            if (err) {
+              res.status(500).json({ message : "failure"});
+              return mysqlConnection.connection.rollback(function() {
+                throw err;
+              });
+            }
+          });
+        });
+      });
   }
 
   if (queryObj['action'] === 'leaveTeam') {
@@ -87,9 +101,23 @@ var getHandler = function(req, res) {
     
     var deleteQuery = `DELETE FROM UserInTeam WHERE teamId = ${teamId} AND userId = ${userId}`;
 
-    mysqlConnection.connection.query(deleteQuery, function (error, teamData, fields) {
-      if (error) 
-        throw error;
+    mysqlConnection.connection.beginTransaction(function(err) {
+      if (err) { 
+        throw err; 
+      }
+      mysqlConnection.connection.query(deleteQuery, function (error, teamData, fields) {
+        if (error) 
+          throw error;
+
+        mysqlConnection.connection.commit(function(err) {
+          if (err) {
+            res.status(500).json({ message : "failure"});
+            return mysqlConnection.connection.rollback(function() {
+              throw err;
+            });
+          }
+        });
+      });
     });
   }
   
@@ -99,9 +127,23 @@ var getHandler = function(req, res) {
     
     var deleteQuery = `DELETE FROM UserInTeam WHERE teamId = ${teamId} AND userId = ${removeUserId}`;
 
-    mysqlConnection.connection.query(deleteQuery, function (error, teamData, fields) {
-      if (error) 
-        throw error;
+    mysqlConnection.connection.beginTransaction(function(err) {
+      if (err) { 
+        throw err; 
+      }
+      mysqlConnection.connection.query(deleteQuery, function (error, teamData, fields) {
+        if (error) 
+          throw error;
+          
+        mysqlConnection.connection.commit(function(err) {
+          if (err) {
+            res.status(500).json({ message : "failure"});
+            return mysqlConnection.connection.rollback(function() {
+              throw err;
+            });
+          }
+        });
+      });
     });
   }
   
