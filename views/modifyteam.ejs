@@ -52,6 +52,10 @@
       %>
       <p class="h1" style="text-decoration: none; color:#563D7C; margin-top: 20px; margin-left: 10px;" >Team: <%= teamData.teamId%></p>
       <p class="h3" style="text-decoration: none; color:#563D7C; margin-left: 10px;">Team Leader: <%= leaderData.firstName%> <%= leaderData.lastName%></p>
+      <p class="h5" style="text-decoration: none; color:#563D7C; margin-left: 10px;">Leader Email: <%= leaderData.email%></p>
+      <% if (leaderData.phoneNumber) { %>
+      <p class="h5" style="text-decoration: none; color:#563D7C; margin-left: 10px;">Leader Phone: <%= leaderData.phoneNumber%></p>
+      <% } %>
       <div id="content" class="container">
         <div class="jumbotron" style="margin: 20px; padding: 20px;">
           <p class="h4" style="text-decoration: none; color:#563D7C" >Team Members</p>
@@ -63,13 +67,17 @@
             %>
               <li style="margin-top: 5px;">
                 <%= userData[x].firstName%> <%= userData[x].lastName%>
-                <button class="button_active" style="margin-left: 25px; margin-right: 17px;" onclick="location.href='/teamprofile?action=removeUser&teamId=<%=teamId%>&userId=<%=userId%>'">Remove User</button>
+                <% 
+                if (userData[x].userId != userId) {
+                %>
+                <button class="button_active" style="margin-left: 25px; margin-right: 17px;" onclick="location.href='/teamprofile?action=removeUser&teamId=<%=teamId%>&userId=<%=userId%>&removeUserId=<%=userData[x].userId%>'">Remove Member</button>
                 <button class="button_active" style="margin-left: 0px; margin-right: 17px;" onclick="location.href='/friends?action=followUser&userId=<%=userId%>&followedUserId=<%=userData[x].userId%>'">Follow User</button>
                 <%= 'Review:  '%>
                 <input type="text" id="<%= reviewTextInputId%>"/>
-                <%= 'Rating:  '%>
+                <%= '\xa0\xa0Rating:  '%>
                 <input type="number" id="<%= reviewRatingInputId%>"/>
-                <button class="button_active" onclick="location.href='/reviews?action=submitReview&teamId=<%=teamId%>&productId=<%=productId%>&reviewerId=<%=userId%>&userId=<%=userData[x].userId%>&rating='+document.getElementById('<%=reviewRatingInputId%>').value+'&review='+document.getElementById('<%=reviewTextInputId%>').value">Submit Review</button>
+                <button class="button_active" onclick="location.href='/reviews?action=submitReview&teamId=<%=teamId%>&productId=<%=productId%>&userId=<%=userId%>&revieweeId=<%=userData[x].userId%>&rating='+document.getElementById('<%=reviewRatingInputId%>').value+'&review='+document.getElementById('<%=reviewTextInputId%>').value">Submit Review</button>
+                <% } %>
               </li>
             <% } %>
           </ul>
@@ -83,6 +91,36 @@
       <% } else { %>
       <p class="h1" style="text-decoration: none; color:#563D7C; margin-top: 20px; margin-left: 10px;" >Team: <%= teamData.teamId%></p>
       <p class="h3" style="text-decoration: none; color:#563D7C; margin-left: 10px;">Team Leader: <%= leaderData.firstName%> <%= leaderData.lastName%></p>
+      <p class="h5" style="text-decoration: none; color:#563D7C; margin-left: 10px;">Leader Email: <%= leaderData.email%></p>
+      <% if (leaderData.phoneNumber) { %>
+      <p class="h5" style="text-decoration: none; color:#563D7C; margin-left: 10px;">Leader Phone: <%= leaderData.phoneNumber%></p>
+      <% } %>
+      <div id="content" class="container">
+        <div class="jumbotron" style="margin: 20px; padding: 20px;">
+          <p class="h4" style="text-decoration: none; color:#563D7C" >Team Members</p>
+          <ul class="list-unstyled">
+            <%
+            for ( x in userData) {
+              var reviewTextInputId = 'reviewTextInput' + x
+              var reviewRatingInputId = 'reviewRatingInput' + x
+            %>
+              <li style="margin-top: 5px;">
+                <%= userData[x].firstName%> <%= userData[x].lastName%>
+                <% 
+                if (userData[x].userId != userId) {
+                %>
+                <button class="button_active" style="margin-left: 25px; margin-right: 17px;" onclick="location.href='/friends?action=followUser&userId=<%=userId%>&followedUserId=<%=userData[x].userId%>'">Follow User</button>
+                <%= 'Review:  '%>
+                <input type="text" id="<%= reviewTextInputId%>"/>
+                <%= '\xa0\xa0Rating:  '%>
+                <input type="number" id="<%= reviewRatingInputId%>"/>
+                <button class="button_active" onclick="location.href='/reviews?action=submitReview&teamId=<%=teamId%>&productId=<%=productId%>&userId=<%=userId%>&revieweeId=<%=userData[x].userId%>&rating='+document.getElementById('<%=reviewRatingInputId%>').value+'&review='+document.getElementById('<%=reviewTextInputId%>').value">Submit Review</button>
+                <% } %>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
       <% } %>
 
       <script src="/javascripts/home.js"></script>

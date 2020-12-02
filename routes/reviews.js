@@ -13,13 +13,14 @@ var getHandler = function(req, res) {
 
   if (queryObj['action'] === 'submitReview') {
     const teamId = queryObj['teamId'];
-    const reviewerId = queryObj['reviewerId'];
+    const reviewerId = queryObj['userId'];
     const userId = queryObj['userId'];
+    const revieweeId = queryObj['revieweeId'];
     const rating = queryObj['rating'];
     const review = queryObj['review'];
     const productId = queryObj['productId']
 
-    var update = `INSERT INTO Reviews(reviewerId, userId, teamId, productId, rating, description) VALUES(${reviewerId}, ${userId}, ${teamId}, ${productId}, ${rating}, '${review}')`;
+    var update = `INSERT INTO Reviews(reviewerId, userId, teamId, productId, rating, description) VALUES(${reviewerId}, ${revieweeId}, ${teamId}, ${productId}, ${rating}, '${review}')`;
     mysqlConnection.connection.query(update, function (error, data, fields) {
       if (error) 
         throw error;
@@ -51,7 +52,7 @@ var getHandler = function(req, res) {
     return;
   }
 
-  var getReviews = `SELECT * FROM Reviews WHERE userId = ${userId}`
+  var getReviews = `SELECT R.teamId as teamId, R.rating as rating, P.productName as productName, R.description as description FROM (Reviews R JOIN Products P ON R.productId = P.productId) WHERE userId = ${userId}`
 
   mysqlConnection.connection.query(getReviews, function (error, reviewData, fields) {
     if (error) 

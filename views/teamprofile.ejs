@@ -51,6 +51,7 @@
   teamData.forEach(function(data) {
     var arr = (data.purchaseDate.toString().split(" "))
     var date = arr.slice(0, 4).join(' ')
+    if (data.initiatorId == userId) {
   %>
   <div id="content" class="container">
     <div class="jumbotron" style="margin: 20px; padding: 20px;">
@@ -68,10 +69,9 @@
           </ul> 
         </div>
         <div class="d-flex flex-column">
-          <p class="h4" style="text-decoration: none; color:#563D7C" >Actions:</p>
+          <p class="h4" style="text-decoration: none; color:#563D7C" >Leader Actions:</p>
           <ul class="list-unstyled">
             <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=modifyTeam&teamId=<%=data.teamId%>&productId=<%=data.productId%>&userId=<%=userId%>'>Modify Team</a></li>
-            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=leaveTeam&teamId=<%=data.teamId%>&userId=<%=userId%>'>Leave Team</a></li>
             <%
             if (data.status == 'inactive') {
             %>
@@ -84,7 +84,33 @@
       </div>
     </div>
   </div>
-  <% }) %>
+  <% } else { %>
+  <div id="content" class="container">
+    <div class="jumbotron" style="margin: 20px; padding: 20px;">
+      <div class="d-flex justify-content-around">
+        <div class="d-flex flex-column">
+          <p class="h4" style="text-decoration: none; color:#563D7C" >Team ID: <%=data.teamId %></p>
+          <ul class="list-unstyled">
+            <li style="margin-top: 5px; margin-left: 10px;">Status: <%=data.status%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Team Size: <%=data.teamSize%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Team Capacity: <%=data.maxGroupSize%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Product Name: <%=data.productName%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Product Company: <%=data.company%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Start Date: <%=date%> </li>
+            <li style="margin-top: 5px; margin-left: 10px;">Monthly Price: <%=data.price%> </li>
+          </ul> 
+        </div>
+        <div class="d-flex flex-column">
+          <p class="h4" style="text-decoration: none; color:#563D7C" >Member Actions:</p>
+          <ul class="list-unstyled">
+            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=modifyTeam&teamId=<%=data.teamId%>&productId=<%=data.productId%>&userId=<%=userId%>'>Modify Team</a></li>
+            <li style="margin-top: 5px; margin-left: 10px;"><a href='/teamprofile?action=leaveTeam&teamId=<%=data.teamId%>&userId=<%=userId%>'>Leave Team</a></li>
+          </ul> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }}) %>
   
   <script src="/javascripts/home.js"></script>
 </body>
