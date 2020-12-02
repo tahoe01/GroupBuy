@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -11,25 +12,31 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #563D7C">
-    <a class="navbar-brand text-light" style="font-family: Courgette; font-style: italic; font-weight: bolder;" href="#">GroupBuy</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand text-light" style="font-family: Courgette; font-style: italic; font-weight: bolder;"
+      href="#">GroupBuy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link text-light" href="/index?userId=<%=userId%>">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link text-light" href="/index?userId=<%=userId%>">Home <span
+              class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link text-light" href="/teamprofile?userId=<%=userId%>">Team Profile<span class="sr-only">(current)</span></a>
+          <a class="nav-link text-light" href="/teamprofile?userId=<%=userId%>">Team Profile<span
+              class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link text-light" href="/reviews?userId=<%=userId%>">Reviews<span class="sr-only">(current)</span></a>
+          <a class="nav-link text-light" href="/reviews?userId=<%=userId%>">Reviews<span
+              class="sr-only">(current)</span></a>
         </li>
       </ul>
       <div class="dropdown show">
-        <a class="btn btn-light dropdown-toggle" style="margin-right: 10px;" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</a>     
+        <a class="btn btn-light dropdown-toggle" style="margin-right: 10px;" href="" role="button" id="dropdownMenuLink"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <p class="dropdown-item">All</p>
           <p class="dropdown-item">Product Name</a>
@@ -45,10 +52,63 @@
     </div>
   </nav>
 
-  <div id="content" class="container">
-    <% for ( x in locals.retrieveResult) { %>
+
+  <div class="container">
+
+    <div class="card-deck mb-3" style="margin: 20px 20px 0px 20px;">
+
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal" style="color:#563D7C">Top Music Plans</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <% for ( x in locals.rankingResult_0) { %>
+            <li class="lead">
+              <span style="float:left"><%= locals.rankingResult_0[x].productName %></span>
+              <span style="float:right"><%= locals.rankingResult_0[x].numPurchase %></span>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal" style="color:#563D7C">Top Video Plans</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <% for ( x in locals.rankingResult_1) { %>
+            <li class="lead">
+              <span style="float:left"><%= locals.rankingResult_1[x].productName %></span>
+              <span style="float:right"><%= locals.rankingResult_1[x].numPurchase %></span>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal" style="color:#563D7C">Top Office Plans</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <% for ( x in locals.rankingResult_2) { %>
+            <li class="lead">
+              <span style="float:left"><%= locals.rankingResult_2[x].productName %></span>
+              <span style="float:right"><%= locals.rankingResult_2[x].numPurchase %></span>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="content" class="container">
+      <% for ( x in locals.retrieveResult) { %>
       <div class="jumbotron" style="margin: 20px; padding: 20px;">
-        <a class="display-4" style="color:#563D7C" href="<%= locals.retrieveResult[x].link%>" > <%= locals.retrieveResult[x].productName  %> </a>
+        <a class="display-4" style="color:#563D7C" href="<%= locals.retrieveResult[x].link%>">
+          <%= locals.retrieveResult[x].productName  %> </a>
         <p class="lead">Company: <%= locals.retrieveResult[x].company  %> </p>
         <p class="lead">Tag: <%= locals.retrieveResult[x].tag  %> </p>
         <p class="lead">Price: <%= locals.retrieveResult[x].price  %> </p>
@@ -63,9 +123,11 @@
         </form>
       </div>                                
     <% } %>
-  </div>
+    </div>
 
+  </div>
   <script src="/javascripts/home.js"></script>
 
 </body>
+
 </html>
