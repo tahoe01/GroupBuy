@@ -1,0 +1,23 @@
+Edit Distance
+The module provides the implementation of three UDF functions based on edit distance (aka Levenshtein distance ) function:
+
+ed : integer ed(string s1, string
+s1): returns the edit distance between s1 and s2. The function assumes that the strings have the same case (i.e., both strings are lower case or both are upper case).
+
+edth : boolean edth(string s1,
+string s1, integer th): returns true if the edit distance between s1 and s2 is smaller or equal than th. This function might be slightly faster than ed as it can stop as soon as the edit distance goes above the threshold. The function assumes that the strings have the same case (i.e., both strings are lower case or both are upper case).
+
+edrec : boolean edrec(string s,
+string rec, integer th): returns true if there is a token in rec that has an edit distance from s smaller or equal to th. The string in rec is tokenized using the following separators: " " (white space), "," (comma), and "." (dot). The function assumes that the query string is in lower case.
+
+Bellow there is one SQL examples for each function:
+
+mysql> SELECT ed('abc', 'ad');
+2
+mysql> SELECT edth('abc', 'abcd', 1);
+1
+mysql> SELECT edrec('ab', 'xx ad xx', 1);
+1
+The boolean values are returned as 0 and 1.
+
+Implemented in C. MySQL how to write a user define function: https://dev.mysql.com/doc/extending-mysql/8.0/en/adding-udf.html (Support C & C++).
